@@ -1,8 +1,8 @@
+import { Jogador } from './../jogador';
 import { Component, OnInit } from '@angular/core';
-import { Jogador } from "../jogador";
-import { DataService } from "../data.service";
-import { Router, Navigation } from "@angular/router";
-import { Casa } from "../casa";
+import { DataService } from '../data.service';
+import { Router, Navigation } from '@angular/router';
+import { Casa } from '../casa';
 
 @Component({
   selector: 'app-jogo',
@@ -10,7 +10,9 @@ import { Casa } from "../casa";
   styleUrls: ['./jogo.component.css']
 })
 export class JogoComponent implements OnInit {
-  jogadores:Jogador[];
+  jogadores: Jogador[];
+  qmVenceu = 0;
+  termina = false;
   constructor(private dataService: DataService, private router: Router) {
     const nav = this.router.getCurrentNavigation();
     this.jogadores = nav.extras.state.jogadores;
@@ -18,7 +20,13 @@ export class JogoComponent implements OnInit {
 
   ngOnInit() {
     this.jogadores = this.dataService.getJogador();
-    console.log(this.jogadores);
   }
 
+  venceu(event) {
+    this.qmVenceu = event;
+  }
+  terminaJogo(event) {
+    console.warn(event);
+    this.termina = event;
+  }
 }

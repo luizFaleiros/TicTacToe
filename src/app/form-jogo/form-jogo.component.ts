@@ -23,6 +23,9 @@ export class FormJogoComponent implements OnInit {
   inicio(){
     this.jogador[0].jogada = 'X';
     this.jogador[1].jogada = 'O';
+    this.jogador[0].vitoria = 0;
+    this.jogador[2].vitoria = 0;
+    this.jogador[1].vitoria = 0;
     this.dataService.setJogador(this.jogador);
     this.router.navigateByUrl('/jogo',{
       state: {jogadores:this.jogador}

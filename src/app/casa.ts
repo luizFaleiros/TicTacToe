@@ -1,4 +1,4 @@
 export class Casa {
-  clicado: boolean;
+  click: boolean;
   valor: string;
 }

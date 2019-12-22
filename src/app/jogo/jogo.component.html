@@ -1,2 +1,2 @@
-<app-placar></app-placar>
-<app-tabuleiro></app-tabuleiro>
+<app-placar [jogadores] ='jogadores' [index]='qmVenceu' [termina]='termina'></app-placar>
+<app-tabuleiro (qmVenceu)='venceu($event)' (terminou)='terminaJogo($event)' [jogadores]='jogadores'></app-tabuleiro>
