@@ -2,8 +2,6 @@ import { Jogador } from './../jogador';
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Router, Navigation } from '@angular/router';
-import { Casa } from '../casa';
-
 @Component({
   selector: 'app-jogo',
   templateUrl: './jogo.component.html',
@@ -13,13 +11,20 @@ export class JogoComponent implements OnInit {
   jogadores: Jogador[];
   qmVenceu = 0;
   termina = false;
+  reseta = false;
+  reinicia = false;
   constructor(private dataService: DataService, private router: Router) {
+
     const nav = this.router.getCurrentNavigation();
-    this.jogadores = nav.extras.state.jogadores;
+    if (nav.extras.state) {
+      this.jogadores = nav.extras.state.jogadores;
+    }else{
+      this.router.navigateByUrl('');
+    }
   }
 
   ngOnInit() {
-    this.jogadores = this.dataService.getJogador();
+
   }
 
   venceu(event) {
@@ -28,5 +33,11 @@ export class JogoComponent implements OnInit {
   terminaJogo(event) {
     console.warn(event);
     this.termina = event;
+  }
+  resetar(event){
+    this.reseta = event;
+  }
+  reiniciar(event){
+    this.reinicia = event;
   }
 }

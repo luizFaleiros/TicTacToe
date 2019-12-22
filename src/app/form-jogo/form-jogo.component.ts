@@ -1,35 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { Jogador } from '../jogador';
-import { DataService } from "../data.service";
+import { DataService } from '../data.service';
 import { Data } from '@angular/router';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-jogo',
   templateUrl: './form-jogo.component.html',
   styleUrls: ['./form-jogo.component.css']
 })
-
 export class FormJogoComponent implements OnInit {
-  jogador:Jogador[] = [];
+  jogador: Jogador[] = [];
 
-
-  constructor(private  dataService: DataService, private router: Router) { }
+  constructor(private dataService: DataService, private router: Router) {}
 
   ngOnInit() {
-    this.jogador = [new Jogador,new Jogador,new Jogador];
+    this.jogador = [new Jogador(), new Jogador(), new Jogador()];
     this.jogador[2].nome = 'Empate';
   }
-  inicio(){
+
+  inicio() {
     this.jogador[0].jogada = 'X';
     this.jogador[1].jogada = 'O';
     this.jogador[0].vitoria = 0;
     this.jogador[2].vitoria = 0;
     this.jogador[1].vitoria = 0;
     this.dataService.setJogador(this.jogador);
-    this.router.navigateByUrl('/jogo',{
-      state: {jogadores:this.jogador}
+    this.router.navigateByUrl('/jogo', {
+      state: { jogadores: this.jogador }
     });
   }
-
 }

@@ -3,7 +3,7 @@
   <h4 id="scoreJogador1">Jogador 1: {{jogadores[0].vitoria}}</h4>
   <h4 id="scoreJogador2">Jogador 2: {{jogadores[1].vitoria}}</h4>
   <h4 id="scoreEmpate">Empates: {{jogadores[2].vitoria}}</h4>
-  <button id="resetaJogo">Resetar Jogo</button>
-  <button id="reiniciaJogo">Reinicia Jogo Atual</button>
-  <div [style.display]='termina ?  "flex": "none"'>Parabens {{jogadores[index].nome}} por ter vencido</div>
+  <button id="resetaJogo" (click)="resetar()">Resetar Jogo</button>
+  <button id="reiniciaJogo" (click)='reiniciar()'>Reinicia Jogo Atual</button>
+  <div [style.display]='termina ?  "flex": "none"' (click)='fechar()'>Parabens {{jogadores[index].nome}} por ter vencido</div>
 </article>

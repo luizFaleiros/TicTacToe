@@ -1,21 +1,29 @@
 import { Jogador } from './../jogador';
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { Casa } from "../casa";
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter
+} from '@angular/core';
+import { Casa } from '../casa';
+import { ResolveStart } from '@angular/router';
 @Component({
-  selector: "app-tabuleiro",
-  templateUrl: "./tabuleiro.component.html",
-  styleUrls: ["./tabuleiro.component.css"]
+  selector: 'app-tabuleiro',
+  templateUrl: './tabuleiro.component.html',
+  styleUrls: ['./tabuleiro.component.css']
 })
-export class TabuleiroComponent implements OnInit {
+export class TabuleiroComponent implements OnInit{
   casas: Casa[] = [];
   @Input() jogadores: Jogador[] = [];
-  @Input() reseta = false;
-  @Input() reinicia = false;
   @Output() qmVenceu = new EventEmitter<number>();
   @Output() terminou = new EventEmitter();
+  @Output() reiniciado = new EventEmitter();
+  @Output() resetado = new EventEmitter();
   jogadorAtual = 0;
   vencedor = false;
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit() {
     this.casas = [
@@ -30,10 +38,10 @@ export class TabuleiroComponent implements OnInit {
       new Casa()
     ];
     if (!this.jogadores[0].nome) {
-      this.jogadores[0].nome = "Xizinho";
+      this.jogadores[0].nome = 'Xizinho';
     }
     if (!this.jogadores[1].nome) {
-      this.jogadores[1].nome = "Bolinha";
+      this.jogadores[1].nome = 'Bolinha';
     }
   }
   troca(index) {
@@ -116,7 +124,21 @@ export class TabuleiroComponent implements OnInit {
       this.jogadores[this.jogadorAtual].vitoria += 1;
       this.vencedor = true;
       this.terminou.emit(this.vencedor);
+      this.qmVenceu.emit(this.jogadorAtual);
       console.log(this.jogadores[this.jogadorAtual].nome);
+    }
+  }
+
+  reiniciar(reinica: boolean) {
+    console.warn(reinica);
+    if (reinica) {
+      for (let item of this.casas) {
+        item.valor = '';
+        item.click = false;
+      }
+      this.vencedor = false;
+      this.reinicia = false;
+      this.reiniciado.emit(reinica);
     }
   }
 }
