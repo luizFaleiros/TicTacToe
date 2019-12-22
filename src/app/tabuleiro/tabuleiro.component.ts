@@ -128,17 +128,4 @@ export class TabuleiroComponent implements OnInit{
       console.log(this.jogadores[this.jogadorAtual].nome);
     }
   }
-
-  reiniciar(reinica: boolean) {
-    console.warn(reinica);
-    if (reinica) {
-      for (let item of this.casas) {
-        item.valor = '';
-        item.click = false;
-      }
-      this.vencedor = false;
-      this.reinicia = false;
-      this.reiniciado.emit(reinica);
-    }
-  }
 }

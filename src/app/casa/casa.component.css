@@ -1,0 +1,9 @@
+.quadrado {
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+  background: #fff;
+  font-size: 5rem;
+  box-sizing: border-box;
+  margin: 0;
+}
