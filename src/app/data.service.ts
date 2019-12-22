@@ -5,9 +5,9 @@ import { Jogador } from './jogador';
   providedIn: 'root'
 })
 export class DataService {
-  private jogador:Jogador[]=[]
+  private jogador: Jogador[] = [];
   constructor() { }
-  setJogador(jogador:Jogador[]){
+  setJogador(jogador: Jogador[]) {
     this.jogador = jogador;
   }
   getJogador(){
