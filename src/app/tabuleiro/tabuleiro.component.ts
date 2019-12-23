@@ -1,3 +1,4 @@
+import { JogoService } from './../jogo.service';
 import { Jogador } from './../jogador';
 import {
   Component,
@@ -7,7 +8,6 @@ import {
   EventEmitter
 } from '@angular/core';
 import { Casa } from '../casa';
-import { ResolveStart } from '@angular/router';
 @Component({
   selector: 'app-tabuleiro',
   templateUrl: './tabuleiro.component.html',
@@ -15,7 +15,7 @@ import { ResolveStart } from '@angular/router';
 })
 export class TabuleiroComponent implements OnInit{
   casas: Casa[] = [];
-  @Input() jogadores: Jogador[] = [];
+  @Input() jogo:JogoService;
   @Output() qmVenceu = new EventEmitter<number>();
   @Output() terminou = new EventEmitter();
   @Output() reiniciado = new EventEmitter();
@@ -26,34 +26,24 @@ export class TabuleiroComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.casas = [
-      new Casa(),
-      new Casa(),
-      new Casa(),
-      new Casa(),
-      new Casa(),
-      new Casa(),
-      new Casa(),
-      new Casa(),
-      new Casa()
-    ];
-    if (!this.jogadores[0].nome) {
-      this.jogadores[0].nome = 'Xizinho';
+    this.jogo.IniciaJogo();
+    if (!this.jogo.jogadores[0].nome) {
+      this.jogo.jogadores[0].nome = 'Xizinho';
     }
-    if (!this.jogadores[1].nome) {
-      this.jogadores[1].nome = 'Bolinha';
+    if (!this.jogo.jogadores[1].nome) {
+      this.jogo.jogadores[1].nome = 'Bolinha';
     }
   }
   troca(index) {
-    this.jogadores[this.jogadorAtual].casas[index] = 1;
+    this.jogo.jogadores[this.jogo.jogadorAtual].casas[index] = 1;
     this.terminaJogo(this.VerVencedor());
-    if (this.jogadorAtual === 0) {
-      this.jogadorAtual = 1;
+    if (this.jogo.jogadorAtual === 0) {
+      this.jogo.jogadorAtual = 1;
     } else {
-      this.jogadorAtual = 0;
+      this.jogo.jogadorAtual = 0;
     }
-    if (!this.vencedor) {
-      this.qmVenceu.emit(this.jogadorAtual);
+    if (!this.jogo.vencedor) {
+      this.qmVenceu.emit(this.jogo.jogadorAtual);
     }
   }
   testeVencedor(a, b, c) {
@@ -70,9 +60,9 @@ export class TabuleiroComponent implements OnInit{
     for (let i = 0; i < 9; i += 3) {
       if (
         this.testeVencedor(
-          this.jogadores[this.jogadorAtual].casas[i],
-          this.jogadores[this.jogadorAtual].casas[i + 1],
-          this.jogadores[this.jogadorAtual].casas[i + 2]
+          this.jogo.jogadores[this.jogo.jogadorAtual].casas[i],
+          this.jogo.jogadores[this.jogo.jogadorAtual].casas[i + 1],
+          this.jogo.jogadores[this.jogo.jogadorAtual].casas[i + 2]
         )
       ) {
         return 1;
@@ -81,9 +71,9 @@ export class TabuleiroComponent implements OnInit{
     for (let i = 0; i < 3; i++) {
       if (
         this.testeVencedor(
-          this.jogadores[this.jogadorAtual].casas[i],
-          this.jogadores[this.jogadorAtual].casas[i + 3],
-          this.jogadores[this.jogadorAtual].casas[i + 6]
+          this.jogo.jogadores[this.jogo.jogadorAtual].casas[i],
+          this.jogo.jogadores[this.jogo.jogadorAtual].casas[i + 3],
+          this.jogo.jogadores[this.jogo.jogadorAtual].casas[i + 6]
         )
       ) {
         return 1;
@@ -91,18 +81,18 @@ export class TabuleiroComponent implements OnInit{
     }
     if (
       this.testeVencedor(
-        this.jogadores[this.jogadorAtual].casas[0],
-        this.jogadores[this.jogadorAtual].casas[4],
-        this.jogadores[this.jogadorAtual].casas[8]
+        this.jogo.jogadores[this.jogo.jogadorAtual].casas[0],
+        this.jogo.jogadores[this.jogo.jogadorAtual].casas[4],
+        this.jogo.jogadores[this.jogo.jogadorAtual].casas[8]
       )
     ) {
       return 1;
     }
     if (
       this.testeVencedor(
-        this.jogadores[this.jogadorAtual].casas[2],
-        this.jogadores[this.jogadorAtual].casas[4],
-        this.jogadores[this.jogadorAtual].casas[6]
+        this.jogo.jogadores[this.jogo.jogadorAtual].casas[2],
+        this.jogo.jogadores[this.jogo.jogadorAtual].casas[4],
+        this.jogo.jogadores[this.jogo.jogadorAtual].casas[6]
       )
     ) {
       return 1;
@@ -110,22 +100,22 @@ export class TabuleiroComponent implements OnInit{
     let soma = 0;
     for (let i = 0; i <= 9; i++) {
       if (i < 9) {
-        soma += this.jogadores[0].casas[i] + this.jogadores[1].casas[i];
+        soma += this.jogo.jogadores[0].casas[i] + this.jogo.jogadores[1].casas[i];
       }
     }
     if (soma === 9) {
-      this.jogadorAtual = 2;
+      this.jogo.jogadorAtual = 2;
       return 1;
     }
     return 0;
   }
   terminaJogo(vencedor) {
     if (vencedor === 1) {
-      this.jogadores[this.jogadorAtual].vitoria += 1;
-      this.vencedor = true;
-      this.terminou.emit(this.vencedor);
-      this.qmVenceu.emit(this.jogadorAtual);
-      console.log(this.jogadores[this.jogadorAtual].nome);
+      this.jogo.jogadores[this.jogo.jogadorAtual].vitoria += 1;
+      this.jogo.vencedor = true;
+      this.terminou.emit(this.jogo.vencedor);
+      this.qmVenceu.emit(this.jogo.jogadorAtual);
+      console.log(this.jogo.jogadores[this.jogo.jogadorAtual].nome);
     }
   }
 }

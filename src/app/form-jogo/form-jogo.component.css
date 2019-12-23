@@ -1,0 +1,24 @@
+.formJogo {
+    background: white;
+    display: flex;
+    flex-flow: column wrap;
+    padding: 30px;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.formJogo input {
+    margin-bottom: 17px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-size: 1.3rem;
+}
+
+.formJogo button {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    color: blue;
+    font-size: 1.3rem;
+}

@@ -2,13 +2,14 @@ import { Jogador } from './../jogador';
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Router, Navigation } from '@angular/router';
+import { JogoService } from '../jogo.service';
 @Component({
   selector: 'app-jogo',
   templateUrl: './jogo.component.html',
   styleUrls: ['./jogo.component.css']
 })
 export class JogoComponent implements OnInit {
-  jogadores: Jogador[];
+  jogo:JogoService = new JogoService();
   qmVenceu = 0;
   termina = false;
   reseta = false;
@@ -17,7 +18,7 @@ export class JogoComponent implements OnInit {
 
     const nav = this.router.getCurrentNavigation();
     if (nav.extras.state) {
-      this.jogadores = nav.extras.state.jogadores;
+      this.jogo.jogadores = nav.extras.state.jogadores;
     }else{
       this.router.navigateByUrl('');
     }

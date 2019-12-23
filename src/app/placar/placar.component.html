@@ -1,9 +1,9 @@
 <article class="placar">
-  <div id="nomeJogador">{{jogadores[index].nome}}</div>
-  <h4 id="scoreJogador1">Jogador 1: {{jogadores[0].vitoria}}</h4>
-  <h4 id="scoreJogador2">Jogador 2: {{jogadores[1].vitoria}}</h4>
-  <h4 id="scoreEmpate">Empates: {{jogadores[2].vitoria}}</h4>
-  <button id="resetaJogo">Resetar Jogo</button>
-  <button id="reiniciaJogo" >Reinicia Jogo Atual</button>
-  <div [style.display]='termina ?  "flex": "none"' (click)='fechar()'>Parabens {{jogadores[index].nome}} por ter vencido</div>
+    <div id="nomeJogador">{{jogo.jogadores[index].nome}}</div>
+    <h4 id="scoreJogador1">Jogador 1: {{jogo.jogadores[0].vitoria}}</h4>
+    <h4 id="scoreJogador2">Jogador 2: {{jogo.jogadores[1].vitoria}}</h4>
+    <h4 id="scoreEmpate">Empates: {{jogo.jogadores[2].vitoria}}</h4>
+    <button id="resetaJogo" (click)='jogo.reseTajogo()'>Resetar Jogo</button>
+    <button id="reiniciaJogo" (click)='jogo.reiniciaJogo()'>Reinicia Jogo Atual</button>
+    <div [style.display]='termina ?  "flex": "none"' (click)='fechar()'>Parabens {{jogo.jogadores[index].nome}} por ter vencido</div>
 </article>
