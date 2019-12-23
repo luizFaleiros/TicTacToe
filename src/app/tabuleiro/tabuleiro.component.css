@@ -1,4 +1,9 @@
-.tabuleiro {
-  display: grid;
-  grid-template-columns: 200px 200px 200px;
+.casa {
+    width: calc(100%/3);
+    height: 200px;
+    border: 1px solid black;
+    background: #fff;
+    font-size: 5rem;
+    box-sizing: border-box;
+    margin: 0;
 }

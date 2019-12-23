@@ -1,10 +1,21 @@
 @import url('https://fonts.googleapis.com/css?family=Cherry+Bomb&display=swap');
-*{
+* {
     margin: 0;
     padding: 0;
     font-family: "Cherry Bomb", cursive;
     position: relative;
-  }
-  body {
+}
+
+body {
     background: #836fff;
-  }
+}
+
+.jogo {
+    display: flex;
+    width: 70vw;
+    height: 70vh;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    max-width: 980px;
+    /*margin: 15% 20%;*/
+}

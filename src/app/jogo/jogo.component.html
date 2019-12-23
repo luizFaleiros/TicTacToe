@@ -1,2 +1,4 @@
-<app-placar [jogo]='jogo' [index]='qmVenceu' [termina]='termina'></app-placar>
-<app-tabuleiro [jogo]='jogo' (qmVenceu)='venceu($event)' (terminou)='terminaJogo($event)'></app-tabuleiro>
+<div class="jogo">
+    <app-placar class='placar' [jogo]='jogo' [index]='qmVenceu' [termina]='termina'></app-placar>
+    <app-tabuleiro class='tabuleiro' [jogo]='jogo' (qmVenceu)='venceu($event)' (terminou)='terminaJogo($event)'></app-tabuleiro>
+</div>
