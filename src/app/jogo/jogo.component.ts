@@ -9,12 +9,11 @@ import { JogoService } from '../jogo.service';
   styleUrls: ['./jogo.component.css']
 })
 export class JogoComponent implements OnInit {
-  jogo:JogoService = new JogoService();
   qmVenceu = 0;
   termina = false;
   reseta = false;
   reinicia = false;
-  constructor(private dataService: DataService, private router: Router) {
+  constructor(private dataService: DataService, private router: Router, public jogo:JogoService) {
 
     const nav = this.router.getCurrentNavigation();
     if (nav.extras.state) {

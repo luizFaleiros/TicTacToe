@@ -8,11 +8,10 @@ import { JogoService } from '../jogo.service';
   styleUrls: ['./placar.component.css']
 })
 export class PlacarComponent implements OnInit {
-  @Input() jogo:JogoService;
   @Input() index: number;
   @Input() termina: boolean;
 
-  constructor() {}
+  constructor(public jogo:JogoService ) {}
 
   ngOnInit() {
     this.index = 0;

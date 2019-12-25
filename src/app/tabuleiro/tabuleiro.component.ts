@@ -15,14 +15,13 @@ import { Casa } from '../casa';
 })
 export class TabuleiroComponent implements OnInit{
   casas: Casa[] = [];
-  @Input() jogo:JogoService;
   @Output() qmVenceu = new EventEmitter<number>();
   @Output() terminou = new EventEmitter();
   @Output() reiniciado = new EventEmitter();
   @Output() resetado = new EventEmitter();
   jogadorAtual = 0;
   vencedor = false;
-  constructor() {
+  constructor(public jogo:JogoService) {
   }
 
   ngOnInit() {
